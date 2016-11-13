@@ -33,7 +33,7 @@
   become: true
   when: rpimonitor_wlan
   lineinfile:
-    regexp: '^#include=/etc/rpimonitor/template/wlan.conf$'
+    regexp: '^#?include=/etc/rpimonitor/template/wlan.conf$'
     line: 'include=/etc/rpimonitor/template/wlan.conf'
     dest: /etc/rpimonitor/data.conf
     state: present
