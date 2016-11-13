@@ -24,7 +24,20 @@
     mode: 0444
     owner: root
     group: root
-  notify: update apt    
+  notify: update apt
+- name: Detect wifi card
+  set_fact: rpimonitor_wlan=true
+  when: 
+    - '"wlan0" in ansible_interfaces'
+- name: Enable WLAN monitor if we have a wireless card
+  become: true
+  when: rpimonitor_wlan
+  lineinfile:
+    regexp: '^#include=/etc/rpimonitor/template/wlan.conf$'
+    line: 'include=/etc/rpimonitor/template/wlan.conf'
+    dest: /etc/rpimonitor/data.conf
+    state: present
+  notify: restart rpimonitor
 - name: Start rpimonitor service
   become: true
   service:
