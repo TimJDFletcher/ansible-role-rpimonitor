@@ -5,3 +5,7 @@
   service:
     name: rpimonitor
     state: restarted
+- name: update apt
+  become: true
+  apt:
+    update_cache: true
