@@ -1,5 +1,4 @@
-DPkg {
-  Post-Invoke {
-    "/usr/share/rpimonitor/scripts/updatePackagesStatus.pl";
-  };
+# Update rpimonitor status
+APT::Update::Post-Invoke {
+  "echo 'Update rpimonitor Packages Status' && /usr/share/rpimonitor/scripts/updatePackagesStatus.pl";
 };
