@@ -1,5 +1,10 @@
 ---
 # tasks file for roles/rpimonitor
+- name: Add signing key
+  become: true
+  apt_key: 
+    keyserver: pgp.mit.edu
+    id: E4E362DE2C0D3C0F
 - name: Add apt repository
   become: true
   apt_repository: 
@@ -7,11 +12,6 @@
     state: present
     filename: 'rpi-monitor'
     update_cache: true
-- name: Add signing key
-  become: true
-  apt_key: 
-    keyserver: pgp.mit.edu
-    id: E4E362DE2C0D3C0F
 - name: Install rpimonitor package
   become: true
   apt:
