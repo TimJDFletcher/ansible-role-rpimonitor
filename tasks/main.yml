@@ -38,6 +38,15 @@
     dest: /etc/rpimonitor/data.conf
     state: present
   notify: restart rpimonitor
+- name: Set daemon listen address
+  become: true
+  when: rpimonitor_daemon_addr is defined
+  lineinfile:
+    regexp: '^#?daemon.addr='
+    line: "daemon.addr={{ rpimonitor_daemon_addr }}"
+    dest: /etc/rpimonitor/daemon.conf
+    state: present
+  notify: restart rpimonitor
 - name: Start rpimonitor service
   become: true
   service:

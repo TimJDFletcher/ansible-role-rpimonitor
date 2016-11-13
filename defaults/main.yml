@@ -2,3 +2,4 @@
 # defaults file for roles/rpimonitor
 rpimonitor_wlan: false
 rpimonitor_openvpn: false
+# rpimonitor_daemon_addr: 127.0.0.1
