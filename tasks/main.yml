@@ -1,0 +1,32 @@
+---
+# tasks file for roles/rpimonitor
+- name: Add apt repository
+  become: true
+  apt_repository: 
+    repo: 'deb http://giteduberger.fr rpimonitor/'
+    state: present
+    filename: 'rpi-monitor'
+    update_cache: true
+- name: Add signing key
+  become: true
+  apt_key: 
+    keyserver: pgp.mit.edu
+    id: E4E362DE2C0D3C0F
+- name: Install rpimonitor package
+  become: true
+  apt:
+    name: rpimonitor
+- name: Enable rpimonitor apt hooks
+  become: true
+  template:
+    src: 99rpimonitor.j2
+    dest: /etc/apt/apt.conf.d/99rpimonitor
+    mode: 0444
+    owner: root
+    group: root
+- name: Start rpimonitor service
+  become: true
+  service:
+    name: rpimonitor
+    state: started
+    enabled: true

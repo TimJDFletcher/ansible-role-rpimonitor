@@ -1,0 +1,7 @@
+---
+# handlers file for roles/rpimonitor
+- name: restart rpimonitor
+  become: true
+  service:
+    name: rpimonitor
+    state: restarted
