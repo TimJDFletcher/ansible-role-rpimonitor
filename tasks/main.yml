@@ -26,6 +26,7 @@
     group: root
   notify: update apt
 - name: Secure cron entry
+  become: true
   file:
     dest: /etc/cron.d/rpimonitor
     mode: 0440
