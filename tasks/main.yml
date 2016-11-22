@@ -25,6 +25,10 @@
     owner: root
     group: root
   notify: update apt
+- name: Secure cron entry
+  file:
+    dest: /etc/cron.d/rpimonitor
+    mode: 0440
 - name: Detect wifi card
   set_fact: rpimonitor_wlan=true
   when: 
